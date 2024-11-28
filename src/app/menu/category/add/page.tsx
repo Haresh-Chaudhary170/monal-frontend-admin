@@ -6,6 +6,7 @@ import { createCategory, fetchCategories } from '../../../services/categoryServi
 import { Category } from '../../../types/category';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
+import PrivateRoute from '@/app/login/privateRoute';
 
 const AddCategoryPage: React.FC = () => {
   const [name, setName] = useState('');
@@ -46,7 +47,8 @@ const AddCategoryPage: React.FC = () => {
   };
 
   return (
-    <DefaultLayout>
+<PrivateRoute>
+<DefaultLayout>
       <Breadcrumb pageName="Add Category" />
       <div className="container mx-auto p-4">
         <form
@@ -115,6 +117,7 @@ const AddCategoryPage: React.FC = () => {
         </form>
       </div>
     </DefaultLayout>
+</PrivateRoute>
   );
 };
 

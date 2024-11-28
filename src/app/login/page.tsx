@@ -33,12 +33,12 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-[#633110]">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm"
       >
-        <h1 className="text-xl font-bold mb-6 text-center">Admin Login</h1>
+        <h1 className="text-xl text-[#633110] font-bold mb-6 text-center">Admin Login</h1>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -66,8 +66,8 @@ const AdminLogin = () => {
         </div>
         <button
           type="submit"
-          className={`w-full bg-blue-500 text-white font-bold py-2 px-4 rounded ${
-            loading ? "opacity-50" : "hover:bg-blue-700"
+          className={`w-full bg-brown text-white font-bold py-2 px-4 rounded ${
+            loading ? "opacity-50" : "hover:bg-[#633110]"
           }`}
           disabled={loading}
         >

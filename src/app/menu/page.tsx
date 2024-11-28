@@ -53,7 +53,6 @@ const ItemsPage: React.FC = () => {
     }
   };
   return (
-    <PrivateRoute>
       <DefaultLayout>
         <Breadcrumb pageName="Menu" />
         {/* <TableThree />
@@ -123,7 +122,6 @@ const ItemsPage: React.FC = () => {
           )}
         </div>
       </DefaultLayout>
-    </PrivateRoute>
   );
 };
 

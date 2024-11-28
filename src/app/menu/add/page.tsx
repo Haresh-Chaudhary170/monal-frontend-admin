@@ -7,6 +7,7 @@ import { createItem } from '../../services/itemService';
 import { Category } from '../../../types/category';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
+import PrivateRoute from '@/app/login/privateRoute';
 
 const AddItemPage: React.FC = () => {
   const [name, setName] = useState('');
@@ -53,7 +54,8 @@ const AddItemPage: React.FC = () => {
   };
 
   return (
-    <DefaultLayout>
+<PrivateRoute>
+<DefaultLayout>
     <Breadcrumb pageName='Add Item'/>
     <div className="container mx-auto p-4">
       <form
@@ -134,6 +136,7 @@ const AddItemPage: React.FC = () => {
       </form>
     </div>
     </DefaultLayout>
+</PrivateRoute>
   );
 };
 

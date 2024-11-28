@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { getItemById, updateItem, fetchCategories } from '../../../services/itemService';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
+import PrivateRoute from '@/app/login/privateRoute';
 
 const EditItemPage = () => {
   const router = useRouter();
@@ -65,7 +66,8 @@ const EditItemPage = () => {
   };
 
   return (
-    <DefaultLayout>
+<PrivateRoute>
+<DefaultLayout>
       <Breadcrumb pageName="Edit Item" />
       <div className="container mx-auto p-4">
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8">
@@ -145,6 +147,7 @@ const EditItemPage = () => {
         </form>
       </div>
     </DefaultLayout>
+</PrivateRoute>
   );
 };
 
