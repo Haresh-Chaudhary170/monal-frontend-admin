@@ -1,10 +1,10 @@
 'use client';
 
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = "https://monal-api-haresh-chaudhary170s-projects.vercel.app";
+const API_URL = "http://localhost:4000";
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);

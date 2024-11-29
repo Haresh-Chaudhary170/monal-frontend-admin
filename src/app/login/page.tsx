@@ -36,30 +36,34 @@ const AdminLogin = () => {
     <div className="min-h-screen flex items-center justify-center bg-[#633110]">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm"
+        className="bg-[#9c4c16] shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm"
       >
-        <h1 className="text-xl text-[#633110] font-bold mb-6 text-center">Admin Login</h1>
+        <h1 className="text-xl text-zinc-200 font-bold mb-6 text-center">Admin Login</h1>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-zinc-200 text-sm font-bold mb-2">
             Email
           </label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Your email"
             required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-zinc-200 text-sm font-bold mb-2">
+            
             Password
           </label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
+
             required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
           />

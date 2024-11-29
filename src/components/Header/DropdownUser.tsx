@@ -20,7 +20,7 @@ const DropdownUser = () => {
       confirmButtonText: "Yes, logout",
       cancelButtonText: "No, stay logged in",
       customClass: {
-        confirmButton: "bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500", // Custom style for confirm button
+        confirmButton: "bg-brown text-white hover:bg-brown", // Custom style for confirm button
         cancelButton: "bg-gray-500 text-white hover:bg-gray-600 focus:ring-2 focus:ring-gray-400", // Custom style for cancel button
       },
     });

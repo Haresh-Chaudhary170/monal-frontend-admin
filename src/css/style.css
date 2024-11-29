@@ -87,7 +87,9 @@
 .apexcharts-xaxistooltip-bottom:before {
     @apply !border-b-gray dark:!border-b-meta-4;
 }
-
+.swal2-confirm{
+    background-color: brown;
+}
 .apexcharts-xaxistooltip-bottom {
     @apply !rounded !border-none !bg-gray !text-xs !font-medium !text-black dark:!text-white;
 }

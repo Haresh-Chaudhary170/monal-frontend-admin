@@ -10,13 +10,17 @@ const apiClient = axios.create({
   },
 });
 
-export const fetchCategories = async (): Promise<Category[]> => {
+export const fetchPCategories = async (): Promise<Category[]> => {
   const response = await apiClient.get('/categories');
+  return response.data;
+};
+export const fetchCategories = async (): Promise<Category[]> => {
+  const response = await apiClient.get('/subcategories');
   return response.data;
 };
 
 export const createCategory = async (category: Partial<Category>) => {
-  const response = await axios.post(`${API_BASE_URL}/categories/add`, category,{
+  const response = await axios.post(`${API_BASE_URL}/subcategories/add`, category,{
     withCredentials: true 
   });
   return response.data;
@@ -24,14 +28,14 @@ export const createCategory = async (category: Partial<Category>) => {
 
 
 export const getCategoryById = async (id: string) => {
-  const response = await axios.get(`${API_BASE_URL}/categories/${id}`,{withCredentials:true});
+  const response = await axios.get(`${API_BASE_URL}/subcategories/${id}`,{withCredentials:true});
   return response.data;
 };
 
 export const updateCategory = async (id: string, categoryData: any) => {
-  const response = await axios.put(`${API_BASE_URL}/categories/${id}`, categoryData,{withCredentials:true});
+  const response = await axios.put(`${API_BASE_URL}/subcategories/${id}`, categoryData,{withCredentials:true});
   return response.data;
 };
 
 export const deleteCategory = async (id: string): Promise<void> =>
-  axios.delete(`${API_BASE_URL}/categories/${id}`,{withCredentials:true}).then(res => res.data);
+  axios.delete(`${API_BASE_URL}/subcategories/${id}`,{withCredentials:true}).then(res => res.data);
