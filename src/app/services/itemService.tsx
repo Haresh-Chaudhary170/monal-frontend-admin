@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Item } from '../types/item';
 
-const API_URL = 'http://localhost:4000/api';
+const API_URL = 'https://monal-api-haresh-chaudhary170s-projects.vercel.app/api';
 
 export const createItem = async (itemData: {
   name: string;
@@ -31,7 +31,7 @@ export const fetchItems = async (): Promise<Item[]> => {
 
 
   export const getItemById = async (id: string) => {
-    const response = await fetch(`http://localhost:4000/api/items/${id}`,);
+    const response = await fetch(`https://monal-api-haresh-chaudhary170s-projects.vercel.app/api/items/${id}`,);
     if (!response.ok) {
       throw new Error("Failed to fetch item");
     }
@@ -39,7 +39,7 @@ export const fetchItems = async (): Promise<Item[]> => {
   };
   
   export const updateItem = async (id: string, updatedData: any) => {
-    const response = await fetch(`http://localhost:4000/api/items/${id}`, {
+    const response = await fetch(`https://monal-api-haresh-chaudhary170s-projects.vercel.app/api/items/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData),
@@ -52,7 +52,7 @@ export const fetchItems = async (): Promise<Item[]> => {
   };
   
   export const fetchCategories = async () => {
-    const response = await fetch(`http://localhost:4000/api/subcategories`,{credentials:"include"});
+    const response = await fetch(`https://monal-api-haresh-chaudhary170s-projects.vercel.app/api/subcategories`,{credentials:"include"});
     if (!response.ok) {
       throw new Error("Failed to fetch categories");
     }

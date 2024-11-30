@@ -35,7 +35,7 @@ const EditCategoryPage: React.FC = ({ params }:any) => {
 
   const fetchAllCategories = async () => {
     try {
-      const allCategories = await fetch('http://localhost:4000/api/categories').then((res) => res.json());
+      const allCategories = await fetch('https://monal-api-haresh-chaudhary170s-projects.vercel.app/api/categories').then((res) => res.json());
       setCategories(allCategories);
     } catch (err) {
       console.error('Error fetching categories:', err);
