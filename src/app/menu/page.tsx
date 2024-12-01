@@ -51,11 +51,11 @@ const CalendarPage = () => {
   }
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Category" />
+      <Breadcrumb pageName="Menu" />
       {/* <TableThree />
        */}
       <div className="container mx-auto p-4">
-        <div className="mb-5 flex justify-between">
+        <div className="mb-5 flex justify-end">
           <Link href="/menu/add">
             <button className="bg-brown border border-4-white text-white font-bold py-2 px-4 rounded">
               Add New Category

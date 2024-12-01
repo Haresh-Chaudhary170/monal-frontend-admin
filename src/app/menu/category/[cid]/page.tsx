@@ -68,21 +68,22 @@ const CalendarPage = ({params}:any) => {
   }
   return (
     <DefaultLayout>
-      <Breadcrumb pageName={`${cname}`} prevPageName='Category'/>
+      <Breadcrumb pageName={`${cname}`} prevPageName='Menu'/>
       {/* <TableThree />
        */}
       <div className="container mx-auto p-4">
         <div className="mb-5 flex justify-between">
+              <Link href={`/menu/`}>
+            <button className="bg-gold border border-4-white text-white font-bold py-2 px-4 rounded">
+              Back
+            </button>
+          </Link>
           <Link href={`/menu/category/${categoryId}/add`}>
             <button className="bg-brown border border-4-white text-white font-bold py-2 px-4 rounded">
               Add Subcategory
             </button>
           </Link>
-          <Link href={`/menu/`}>
-            <button className="bg-gold border border-4-white text-white font-bold py-2 px-4 rounded">
-              Back
-            </button>
-          </Link>
+      
 
         </div>
         {/* <CategoryForm onCategoryAdded={loadCategories} /> */}

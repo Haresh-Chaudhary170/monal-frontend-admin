@@ -17,11 +17,12 @@ const ItemsPage: React.FC = ({ params }: any) => {
   const [cname, setCName] = useState('');
   const [scname, setSCName] = useState('');
 
-  const categoryId = params.cid; 
+  const categoryId = params.cid;
   const subcategoryId = params.scid;
 
 
-  useEffect(() => {console.log(categoryId);
+  useEffect(() => {
+    console.log(categoryId);
     const loadItems = async () => {
       try {
         const fetchedItems = await fetchItemsByCategory(subcategoryId);
@@ -37,7 +38,7 @@ const ItemsPage: React.FC = ({ params }: any) => {
     loadCategory()
     loadSubategory();
   }, []);
-  const loadCategory= async () => {
+  const loadCategory = async () => {
     try {
       const category = await getCategoryById(categoryId);
       setCName(category.name);
@@ -46,8 +47,8 @@ const ItemsPage: React.FC = ({ params }: any) => {
       alert('Failed to fetch category');
     }
   };
-  const loadSubategory= async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/subcategories/${subcategoryId}`,{withCredentials:true});
+  const loadSubategory = async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/subcategories/${subcategoryId}`, { withCredentials: true });
     setSCName(response.data.name);
   };
 
@@ -80,27 +81,23 @@ const ItemsPage: React.FC = ({ params }: any) => {
   };
   return (
     <DefaultLayout>
-      <Breadcrumb pageName={scname} prevPageName='Category' prevPageName2={cname} />
+      <Breadcrumb pageName={scname} prevPageName='Menu' prevPageName2={cname} />
       {/* <TableThree />
        */}
       <div className="container mx-auto p-4">
 
-        <div className="mb-5 flex justify-between">
-          <div className="flex justify-between gap-2">
-
-            <Link href={`/menu/category/${categoryId}/${subcategoryId}/item/add`}>
-              <button className="bg-brown text-white font-bold py-2 px-4 rounded">
-                Add Item
-              </button>
-            </Link>
-
-            <div className="flex justify-end">
-            <Link href={`/menu/category/${categoryId}`}>
-              <button className="bg-gold border border-4-white text-white font-bold py-2 px-4 rounded">
-                Back
-              </button>
-            </Link>
-            </div>
+        <div className="mb-5">
+          <div className="flex justify-between">
+              <Link href={`/menu/category/${categoryId}`}>
+                <button className="bg-gold border border-4-white text-white font-bold py-2 px-4 rounded">
+                  Back
+                </button>
+              </Link>
+              <Link className='flex justify-end' href={`/menu/category/${categoryId}/${subcategoryId}/item/add`}>
+                <button className="bg-brown text-white font-bold py-2 px-4 rounded">
+                  Add Item
+                </button>
+              </Link>
           </div>
 
         </div>      {loading ? (
