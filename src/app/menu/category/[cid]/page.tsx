@@ -8,25 +8,40 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import SubcategoryList from '@/components/SubcategoryList';
+import { getCategoryById } from '@/app/services/categoryService';
 
 
 const CalendarPage = ({params}:any) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const router = useRouter();
-  const categoryId = params.cid; // Directly access the id from params
+  const [cname, setCName] = useState('');
+
+  const categoryId = params.cid;
 
   const loadCategories = async () => {
     try {
-      const data = await fetchCategories();
+      const data = await fetchCategories(categoryId);
+      console.log(data);
       setCategories(data);
     } catch (err) {
       console.error('Error fetching categories:', err);
     }
   };
+  const loadCategory= async () => {
+    try {
+      const category = await getCategoryById(categoryId);
+      setCName(category.name);
+    } catch (err) {
+      console.error('Error fetching category:', err);
+      alert('Failed to fetch category');
+    }
+  };
 
   useEffect(() => {
     console.log(categoryId);
+    loadCategory();
     loadCategories();
+
   }, []);
   const deleteCategoryy = async (id: string) => {
     const result = await Swal.fire({
@@ -53,7 +68,7 @@ const CalendarPage = ({params}:any) => {
   }
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Subcategory" />
+      <Breadcrumb pageName={`${cname}`} prevPageName='Category'/>
       {/* <TableThree />
        */}
       <div className="container mx-auto p-4">
@@ -79,8 +94,7 @@ const CalendarPage = ({params}:any) => {
           <thead>
             <tr className="bg-gray-200 uppercase text-sm leading-normal">
               <th className="py-3 px-6 text-left border border-gray-300">Name</th>
-              <th className="py-3 px-6 text-left border border-gray-300">
-                Parent Category
+              <th className="py-3 px-6 text-left border border-gray-300">Category
               </th>
               <th className="py-3 px-6 text-left border border-gray-300">
                 Action
@@ -88,7 +102,7 @@ const CalendarPage = ({params}:any) => {
             </tr>
           </thead>
           <tbody className="text-white text-sm font-light">
-            {categories?.map((category:any) => (
+            {categories?.length!==0? (categories?.map((category:any) => (
               <tr
                 key={category._id}
                 className="border-b border-gray-200"
@@ -106,7 +120,7 @@ const CalendarPage = ({params}:any) => {
                 </td>
                 <td className="px-6 py-4 border-b border-gray-200 text-center flex gap-2">
                 <Link
-                    href={`/menu/category/${category._id}/item`}
+                    href={`/menu/category/${categoryId}/${category._id}/item`}
                     className=" px-4 py-2 rounded-md shadw focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-eye" viewBox="0 0 16 16">
@@ -133,7 +147,8 @@ const CalendarPage = ({params}:any) => {
                   </button>
                 </td>
               </tr>
-            ))}
+            ))):(<>
+            <span className='flex justify-center font-bold text-xl p-4'>No Data</span></>)}
           </tbody>
         </table>
       </div>

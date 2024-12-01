@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = "https://monal-api-haresh-chaudhary170s-projects.vercel.app";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await axios.get(`${API_URL}/api/admin/protected`, { withCredentials: true });
+        await axios.get(`${API_URL}/admin/protected`, { withCredentials: true });
         setIsAuthenticated(true);
       } catch (err) {
         setIsAuthenticated(false);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Category } from '../../types/category';
 
-const API_BASE_URL = 'https://monal-api-haresh-chaudhary170s-projects.vercel.app/api'; // Update with your API URL
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL; // Update with your API URL
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -14,9 +14,9 @@ export const fetchPCategories = async (): Promise<Category[]> => {
   const response = await apiClient.get('/categories');
   return response.data;
 };
-export const fetchCategories = async (): Promise<Category[]> => {
-  const response = await apiClient.get('/subcategories');
-  return response.data;
+export const fetchCategories = async (cid:string): Promise<Category[]> => {
+  const response = await apiClient.get(`/subcategori/${cid}`);
+  return response.data.subcategories;
 };
 
 export const createCategory = async (category: Partial<Category>) => {

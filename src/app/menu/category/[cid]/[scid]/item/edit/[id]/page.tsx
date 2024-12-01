@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { getItemById, updateItem, fetchCategories } from '../../../../../../services/itemService';
+import { getItemById, updateItem, fetchCategories } from '../../../../../../../services/itemService';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 import PrivateRoute from '@/app/login/privateRoute';
@@ -12,11 +12,12 @@ const EditItemPage = () => {
   const params = useParams();
   const itemId = params.id as string;
   const categoryId = params.cid as string;
+  const subcategoryId = params.scid as string;
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
-  const [subcategory, setCategory] = useState<string | null>(null);
+  const [subcategory, setCategory] = useState<string | null>(subcategoryId);
   const [inGlass, setInGlass] = useState<'glass' | 'bottle'>('glass');
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,12 +30,14 @@ const EditItemPage = () => {
   }, [itemId]);
 
   const fetchItem = async (id: string) => {
+    console.log('category: '+categoryId);
+    console.log('subcategory: '+subcategoryId);
     try {
       const item = await getItemById(id);
       setName(item.name);
       setDescription(item.description || '');
       setPrice(item.price);
-      setCategory(item.subcategory?._id || null);
+      setCategory(subcategoryId);
       setInGlass(item.inGlass || 'glass');
     } catch (err) {
       console.error('Error fetching item:', err);
@@ -56,8 +59,8 @@ const EditItemPage = () => {
     setLoading(true);
 
     try {
-      await updateItem(itemId, { name, description, price, subcategory });
-      router.push(`/menu/category/${categoryId}/item`); // Redirect to the items list
+      await updateItem(itemId, { name, description, price, subcategory:subcategoryId });
+      router.push(`/menu/category/${categoryId}/${subcategoryId}/item`); // Redirect to the items list
     } catch (err) {
       console.error('Error updating item:', err);
       alert('Failed to update item');
@@ -100,7 +103,7 @@ const EditItemPage = () => {
               required
             />
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-white text-sm font-bold mb-2">Category</label>
             <select
               value={subcategory || ''}
@@ -115,7 +118,7 @@ const EditItemPage = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
          
           <div className="flex items-center justify-between">
             <button
@@ -129,7 +132,7 @@ const EditItemPage = () => {
             </button>
             <button
               type="button"
-              onClick={() => router.push(`/menu/category/${categoryId}/items`)}
+              onClick={() => router.push(`/menu/category/${categoryId}/${subcategoryId}/item`)}
               className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Cancel

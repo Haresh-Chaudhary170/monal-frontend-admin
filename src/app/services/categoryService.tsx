@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Category } from '../../types/category';
 
-const API_BASE_URL = 'https://monal-api-haresh-chaudhary170s-projects.vercel.app/api'; // Update with your API URL
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL; // Update with your API URL
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,

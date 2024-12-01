@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://monal-api-haresh-chaudhary170s-projects.vercel.app";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const loginAdmin = async (credentials: { email: string; password: string }) => {
     try {
-        const response = await axios.post(`${API_URL}/api/loginAdmin`, credentials, {
+        const response = await axios.post(`${API_URL}/loginAdmin`, credentials, {
             withCredentials: true,
         });
         return response.data;
@@ -16,7 +16,7 @@ export const loginAdmin = async (credentials: { email: string; password: string 
 
 export const logout = async () => {
     try {
-        await axios.post(`${API_URL}/api/logoutAdmin`, {}, { withCredentials: true });
+        await axios.post(`${API_URL}/logoutAdmin`, {}, { withCredentials: true });
         return true;
     } catch (error) {
         console.error("Logout failed:", error);

@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { fetchCategories } from '../../../../../services/subcategoryService';
-import { createItem } from '../../../../../services/itemService';
-import { Category } from '../../../../../types/category';
+import { fetchCategories } from '../../../../../../services/subcategoryService';
+import { createItem } from '../../../../../../services/itemService';
+import { Category } from '../../../../../../types/category';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 import PrivateRoute from '@/app/login/privateRoute';
@@ -18,34 +18,24 @@ const AddItemPage: React.FC = ({params}:any) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const categoryId=params.cid;
+  const subcategoryId=params.scid;
 
-  // Fetch categories for the category dropdown
-  useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const fetchedCategories = await fetchCategories();
-        setCategories(fetchedCategories);
-      } catch (err) {
-        console.error('Error fetching categories:', err);
-      }
-    };
-    loadCategories();
-  }, []);
-
+ 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setCategories(subcategoryId);    
 
     const newItem = {
       name,
       price,
-      subcategory,
+      subcategory:subcategoryId,
       description,
     };
 
     try {
       await createItem(newItem);
-      router.push(`/menu/category/${categoryId}/item`); // Redirect to the item list page
+      router.push(`/menu/category/${categoryId}/${subcategoryId}/item`); // Redirect to the item list page
     } catch (err) {
       console.error('Error adding item:', err);
       alert('Failed to add item');
@@ -87,7 +77,7 @@ const AddItemPage: React.FC = ({params}:any) => {
             required
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-white text-sm font-bold mb-2">
             Category
           </label>
@@ -104,7 +94,7 @@ const AddItemPage: React.FC = ({params}:any) => {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
         <div className="mb-4">
           <label className="block text-white text-sm font-bold mb-2">
             Description
@@ -128,7 +118,7 @@ const AddItemPage: React.FC = ({params}:any) => {
           </button>
           <button
             type="button"
-            onClick={() => router.push(`/menu/category/${categoryId}/item`)}
+            onClick={() => router.push(`/menu/category/${categoryId}/${subcategoryId}/item`)}
             className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Cancel
